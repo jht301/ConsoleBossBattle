@@ -19,7 +19,7 @@ public:
 	void ResetGame();
 	void PrintIntro();
 	void PrintInfo();
-
+	void SetPlayerName(FText name);
 	FText GetBossName();
 	Bosses BossSelector();
 	
@@ -34,6 +34,8 @@ private:
 	int32 bossHealth = 20;
 	int32 bossAttack = 1;
 	int32 bossDefense = 1;
+
+	FText playerName;
 
 	FText currentBossName;
 	Bosses currentBoss;

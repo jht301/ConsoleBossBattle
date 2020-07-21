@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include "FBossBattle.h"
 
 using FText = std::string;
@@ -9,12 +10,14 @@ using int32 = int;
 bool runGame = true;
 FBossBattle BossBat;
 
+void RunIntro();
 void PlayGame();
 
 int main()
 {
     //Introduction
-    BossBat.PrintIntro();
+    RunIntro();
+    
     PlayGame();
     //Battle 
     //End game
@@ -33,16 +36,27 @@ void PlayGame() {
         //defend 
         //check for win conditions
         
+        runGame = false;
 
     } while (runGame);
 }
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+void RunIntro() {
+    std::cout
+        << "//////////////////////////////////////////////////////\n"
+        << "///////////   Welcome to Boss Battle!  ///////////////\n"
+        << "//////////////////////////////////////////////////////\n\n"
+
+        << "Press the number of the attack you wish to use.\n"
+        << "Good Luck.\n\n";
+
+    std::cout << "What's your name? ";
+
+    FText name = "";
+
+    std::getline(std::cin, name);
+    BossBat.SetPlayerName(name);
+
+    std::cout << "\n\n";
+}
+

@@ -8,6 +8,7 @@ void FBossBattle::ResetGame()
 {
 	//pick a boss
 	currentBoss = BossSelector();
+	currentBossName = GetBossName();
 	//reset player values
 	playerHealth = 20;
 	playerAttack = 1;
@@ -16,13 +17,7 @@ void FBossBattle::ResetGame()
 }
 
 void FBossBattle::PrintIntro() {
-	std::cout
-		<< "//////////////////////////////////////////////////////\n"
-		<< "///////////   Welcome to Boss Battle!  ///////////////\n"
-		<< "//////////////////////////////////////////////////////\n\n"
-
-		<< "Press the number of the attack you wish to use.\n"
-		<< "Good Luck.\n\n";
+	
 }
 
 void FBossBattle::PrintInfo() {
@@ -30,30 +25,35 @@ void FBossBattle::PrintInfo() {
 		<< "Boss: " << currentBossName << "\n"
 		<< "Health: " << bossHealth << std::endl
 		<< "\n"
-		<< "Player: \n"
+		<< "Player: " << playerName <<"\n"
 		<< "Health: " << playerHealth << " Attack: " << playerAttack << " Defense: " << playerDefense << std::endl;
+}
+
+void FBossBattle::SetPlayerName(FText name)
+{
+	playerName = name;
 }
 
 FText FBossBattle::GetBossName() {
 	switch (currentBoss)
 	{
 	case Bosses::Cyclops:
-		currentBossName = "Cyclops";
+		return "Cyclops";
 		break;
 	case Bosses::Dragon:
-		currentBossName = "Dragon";
+		return "Dragon";
 		break;
 	case Bosses::Ogre:
-		currentBossName = "Ogre";
+		return "Ogre";
 		break;
 	default:
 		break;
 	}
-
+	return "";
 }
 
 Bosses FBossBattle::BossSelector() {
-	int ind = std::rand() % 3;
+	int ind = std::rand() % 3; //TODO fix the random number bug
 	switch (ind) {
 	case 0:
 		bossHealth = 30;
