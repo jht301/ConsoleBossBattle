@@ -2,40 +2,12 @@
 //
 
 #include <iostream>
-#include "FBossBattle.h"
-
-using FText = std::string;
-using int32 = int;
-bool runGame = true;
-FBossBattle BossBat;
-
-void PlayGame();
 
 int main()
 {
-    //Introduction
-    BossBat.PrintIntro();
-    PlayGame();
-    //Battle 
-    //End game
-    //Reset?
-
+    std::cout << "Hello World!\n";
 }
 
-
-
-void PlayGame() {
-    do {
-        //print stats
-        BossBat.PrintInfo();
-        
-        //attack
-        //defend 
-        //check for win conditions
-        
-
-    } while (runGame);
-}
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

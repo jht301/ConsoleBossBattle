@@ -148,10 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BossBattle.cpp" />
-    <ClCompile Include="FBossBattle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FBossBattle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
