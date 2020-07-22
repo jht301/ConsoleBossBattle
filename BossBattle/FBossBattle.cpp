@@ -1,5 +1,6 @@
 #include "FBossBattle.h"
 
+using namespace std::this_thread;
 FBossBattle::FBossBattle() {
 	ResetGame();
 }
@@ -21,17 +22,54 @@ void FBossBattle::PrintIntro() {
 }
 
 void FBossBattle::PrintInfo() {
-	std::cout 
+	const int32 textDelay = 1000000;
+	std::cout
 		<< "Boss: " << currentBossName << "\n"
 		<< "Health: " << bossHealth << std::endl
 		<< "\n"
-		<< "Player: " << playerName <<"\n"
-		<< "Health: " << playerHealth << " Attack: " << playerAttack << " Defense: " << playerDefense << std::endl;
+		<< "Player: " << playerName << "\n"
+		<< "Health: " << playerHealth << " Attack: " << playerAttack << " Defense: " << playerDefense << std::endl << std::endl;
+	std::this_thread::sleep_for(std::chrono::microseconds(textDelay));
+	std::cout
+		<< "Choose Your Move:" << std::endl
+		<< "1. Attack          2. Power Boost" << std::endl
+		<< "3. Defense Boost   4. Heal" << std::endl <<std::endl;
+
 }
 
 void FBossBattle::SetPlayerName(FText name)
 {
 	playerName = name;
+}
+
+PlayerMoves FBossBattle::ConvertPlayerMove(int32 selection)
+{
+	switch (selection)
+	{
+	case 1:
+		return PlayerMoves::Attack;
+	case 2:
+		return PlayerMoves::PowerUp;
+	case 3:
+		return PlayerMoves::DefenseUp;
+	case 4:
+		return PlayerMoves::Heal;
+	case 0:
+		return PlayerMoves::Error;
+	default:
+		break;
+	}
+	return PlayerMoves::None;
+}
+
+PlayerMoves FBossBattle::GetSelectedMove()
+{
+	return selectedMove;
+}
+
+void FBossBattle::SetPlayerMove(PlayerMoves validMove)
+{
+	selectedMove = validMove;
 }
 
 FText FBossBattle::GetBossName() {

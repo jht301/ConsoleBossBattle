@@ -12,6 +12,7 @@ FBossBattle BossBat;
 
 void RunIntro();
 void PlayGame();
+PlayerMoves GetValidMove();
 
 int main()
 {
@@ -31,7 +32,10 @@ void PlayGame() {
     do {
         //print stats
         BossBat.PrintInfo();
-        
+        PlayerMoves thisMove = GetValidMove(); //Validates selection and returns the player's move
+
+        std::cout << "Selected: ";
+
         //attack
         //defend 
         //check for win conditions
@@ -58,5 +62,20 @@ void RunIntro() {
     BossBat.SetPlayerName(name);
 
     std::cout << "\n\n";
+}
+
+PlayerMoves GetValidMove() {
+    int32 moveNumber;
+    std::cin >> moveNumber; //have the player choose the number
+    PlayerMoves selectedMove = BossBat.ConvertPlayerMove(moveNumber);
+    if (selectedMove == PlayerMoves::Error) {
+        std::cout << "Please choose a number from 1-4\n";
+        std::cin.clear();
+        std::cin.ignore();
+        GetValidMove();
+    }
+    else {
+        return selectedMove;
+    }
 }
 

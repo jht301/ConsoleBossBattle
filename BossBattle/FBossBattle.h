@@ -1,7 +1,7 @@
 #pragma once
 
 #include<iostream>
-
+#include <thread>
 
 using int32 = int;
 using FText = std::string;
@@ -9,6 +9,14 @@ enum class Bosses {
 	Dragon,
 	Ogre,
 	Cyclops,
+	Error
+};
+enum class PlayerMoves {
+	Attack,
+	PowerUp,
+	DefenseUp,
+	Heal,
+	None,
 	Error
 };
 
@@ -20,6 +28,11 @@ public:
 	void PrintIntro();
 	void PrintInfo();
 	void SetPlayerName(FText name);
+
+	PlayerMoves ConvertPlayerMove(int32 selection);
+	PlayerMoves GetSelectedMove();
+	void SetPlayerMove(PlayerMoves validMove);
+
 	FText GetBossName();
 	Bosses BossSelector();
 	
@@ -36,6 +49,7 @@ private:
 	int32 bossDefense = 1;
 
 	FText playerName;
+	PlayerMoves selectedMove = PlayerMoves::None;
 
 	FText currentBossName;
 	Bosses currentBoss;
