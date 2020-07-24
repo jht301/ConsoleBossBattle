@@ -29,10 +29,17 @@ public:
 	void PrintInfo();
 	void SetPlayerName(FText name);
 
+	void Attack();
+	void PowerUp();
+	void DefenseUp();
+	void Heal();
+
+
 	PlayerMoves ConvertPlayerMove(int32 selection);
-	PlayerMoves GetSelectedMove();
+	PlayerMoves GetPlayerMove();
 	void SetPlayerMove(PlayerMoves validMove);
 
+	int32 GetBossHealth();
 	FText GetBossName();
 	Bosses BossSelector();
 	

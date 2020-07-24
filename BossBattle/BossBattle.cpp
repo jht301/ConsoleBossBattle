@@ -7,19 +7,21 @@
 
 using FText = std::string;
 using int32 = int;
-bool runGame = true;
+bool bossAlive = true;
+bool playerAlive = true;
 FBossBattle BossBat;
 
 void RunIntro();
-void PlayGame();
-PlayerMoves GetValidMove();
+void FightBoss();
+void DoTheMove();
+PlayerMoves PickValidMove();
 
 int main()
 {
     //Introduction
     RunIntro();
     
-    PlayGame();
+    FightBoss();
     //Battle 
     //End game
     //Reset?
@@ -28,21 +30,25 @@ int main()
 
 
 
-void PlayGame() {
+void FightBoss() {
     do {
         //print stats
         BossBat.PrintInfo();
-        PlayerMoves thisMove = GetValidMove(); //Validates selection and returns the player's move
+        PickValidMove(); //Validates selection and returns the player's move
 
-        std::cout << "Selected: ";
-
-        //attack
-        //defend 
+        DoTheMove();
         //check for win conditions
-        
-        runGame = false;
+        if (BossBat.GetBossHealth <= 0) {
+            bossAlive = false;
+            std::cout << BossBat.GetPlayerName() << " WINS!!\n";
+        }
+        else {
+            //boss attack
 
-    } while (runGame);
+            //is player alive
+        }
+
+    } while (bossAlive && playerAlive);
 }
 
 void RunIntro() {
@@ -64,7 +70,7 @@ void RunIntro() {
     std::cout << "\n\n";
 }
 
-PlayerMoves GetValidMove() {
+PlayerMoves PickValidMove() {
     int32 moveNumber;
     std::cin >> moveNumber; //have the player choose the number
     PlayerMoves selectedMove = BossBat.ConvertPlayerMove(moveNumber);
@@ -72,10 +78,31 @@ PlayerMoves GetValidMove() {
         std::cout << "Please choose a number from 1-4\n";
         std::cin.clear();
         std::cin.ignore();
-        GetValidMove();
+        PickValidMove();
     }
     else {
+        BossBat.SetPlayerMove(selectedMove);
+
         return selectedMove;
     }
 }
 
+void DoTheMove() {
+    switch (BossBat.GetPlayerMove())
+    {
+    case PlayerMoves::Attack:
+        BossBat.Attack();
+        break;
+    case PlayerMoves::PowerUp:
+        BossBat.PowerUp();
+        break;
+    case PlayerMoves::DefenseUp:
+        BossBat.DefenseUp();
+        break;
+    case PlayerMoves::Heal:
+        BossBat.Heal();
+        break;
+    default:
+        break;
+    }
+}

@@ -42,6 +42,36 @@ void FBossBattle::SetPlayerName(FText name)
 	playerName = name;
 }
 
+void FBossBattle::Attack()
+{
+	if (playerAttack > bossDefense) {
+		const int32 damageDone = playerAttack - bossDefense;
+		bossHealth -= damageDone;
+		std::cout << currentBossName << " took " << damageDone << " damage!";
+	}
+	else {
+		std::cout << "The attack did nothing. He's too strong!\n";
+	}
+}
+
+void FBossBattle::PowerUp()
+{
+	playerAttack++;
+	std::cout << "Power Up! Attack +1\n";
+}
+
+void FBossBattle::DefenseUp()
+{
+	playerDefense++;
+	std::cout << "Defense Up! Defense +1\n";
+}
+
+void FBossBattle::Heal()
+{
+	playerHealth += playerAttack;
+	std::cout << "Healed +" << playerAttack << " health\n";
+}
+
 PlayerMoves FBossBattle::ConvertPlayerMove(int32 selection)
 {
 	switch (selection)
@@ -62,7 +92,7 @@ PlayerMoves FBossBattle::ConvertPlayerMove(int32 selection)
 	return PlayerMoves::None;
 }
 
-PlayerMoves FBossBattle::GetSelectedMove()
+PlayerMoves FBossBattle::GetPlayerMove()
 {
 	return selectedMove;
 }
@@ -70,6 +100,16 @@ PlayerMoves FBossBattle::GetSelectedMove()
 void FBossBattle::SetPlayerMove(PlayerMoves validMove)
 {
 	selectedMove = validMove;
+}
+
+int32 FBossBattle::GetBossHealth()
+{
+	return bossHealth;
+}
+
+FText FBossBattle::GetPlayerName()
+{
+	return playerName;
 }
 
 FText FBossBattle::GetBossName() {
